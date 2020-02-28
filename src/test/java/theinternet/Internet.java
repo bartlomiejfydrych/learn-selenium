@@ -1,5 +1,6 @@
 package theinternet;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.junit.Before;
@@ -9,6 +10,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -47,11 +52,36 @@ public class Internet {
     }
 
     @Test
-    public void BasicAuth(){
+    public void basicAuth(){
         driver.findElement(By.linkText("Basic Auth")).click();
         // http://username:password@adres.pl
         driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
         String isTextDisplayed = driver.findElement(By.cssSelector("p")).getText();
         Assert.assertEquals("Congratulations! You must have the proper credentials.", isTextDisplayed);
+    }
+
+    @Test
+    public void brokenImages(){
+        driver.findElement(By.linkText("Broken Images")).click();
+        List<WebElement> list = driver.findElements(By.tagName("img"));
+        System.out.println("Total number of Images on page Broken Images:---->>"+ list.size());
+
+        //TODO brak pomysłu na asercję
+
+        for(WebElement ele : list){
+            try {
+                HttpURLConnection conn = (HttpURLConnection) new URL(ele.getAttribute("src")).openConnection();
+                conn.setRequestMethod("GET");
+                int responceCode = conn.getResponseCode();
+                if(responceCode != 200){
+                    System.out.println("Broken Image:---->>"+ele.getAttribute("src"));
+                }
+                else{
+                    System.out.println("Fine Image:---->>"+ele.getAttribute("src"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
