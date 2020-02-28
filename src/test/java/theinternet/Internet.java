@@ -45,4 +45,13 @@ public class Internet {
         buttonDelete.click();
         Assert.assertFalse(driver.findElements(By.cssSelector("div#elements > button")).size() != 0);
     }
+
+    @Test
+    public void BasicAuth(){
+        driver.findElement(By.linkText("Basic Auth")).click();
+        // http://username:password@adres.pl
+        driver.get("http://admin:admin@the-internet.herokuapp.com/basic_auth");
+        String isTextDisplayed = driver.findElement(By.cssSelector("p")).getText();
+        Assert.assertEquals("Congratulations! You must have the proper credentials.", isTextDisplayed);
+    }
 }
