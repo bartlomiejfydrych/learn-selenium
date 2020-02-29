@@ -15,7 +15,7 @@ public class TestBase {
     public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("http://testerczaki.pl/");
     }
