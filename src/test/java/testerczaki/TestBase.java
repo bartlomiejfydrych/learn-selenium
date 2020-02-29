@@ -1,18 +1,18 @@
 package testerczaki;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.concurrent.TimeUnit;
 
-public class Testerczaki
-{
+public class TestBase {
     WebDriver driver;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
@@ -20,5 +20,8 @@ public class Testerczaki
         driver.get("http://testerczaki.pl/");
     }
 
-    
+    @After
+    public void tearDown(){
+        driver.quit();
+    }
 }
