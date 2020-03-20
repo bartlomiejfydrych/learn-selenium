@@ -3,16 +3,18 @@ package testerczaki;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class OknaZakladki extends TestBase
-{
+public class OknaZakladki extends TestBase {
+
     @Test
-    public void Zakladki(){
+    public void Zakladki() {
         driver.findElement(By.cssSelector("[href=\"/okna\"]")).click();
         driver.findElement(By.id("newTab")).click();
-        ArrayList<String> tabs2 = new ArrayList<String>(driver.getWindowHandles());
+        List<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
 
         driver.switchTo().window(tabs2.get(1)); //Tab number
 
@@ -31,10 +33,10 @@ public class OknaZakladki extends TestBase
     }
 
     @Test
-    public void Okna(){
+    public void Okna() {
         driver.findElement(By.cssSelector("[href=\"/okna\"]")).click();
         driver.findElement(By.id("newWindow")).click();
-        ArrayList<String> windows2 = new ArrayList<String>(driver.getWindowHandles());
+        List<String> windows2 = new ArrayList<>(driver.getWindowHandles());
 
         driver.switchTo().window(windows2.get(1)); //Window number
         driver.manage().window().maximize();

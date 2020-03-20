@@ -26,11 +26,11 @@ public class Asercja extends TestBase
         rulesCheckBox.click();
         driver.findElement(By.id("submit")).click();
 
-        Assert.assertEquals(firstName.getAttribute("value"), "Bogdan");
-        Assert.assertEquals(lastName.getAttribute("value"), "Bogucki");
-        Assert.assertEquals(email.getAttribute("value"), "boguskopytko@amorki.pl");
-        Assert.assertEquals(city.getAttribute("value"), "Chorzów");
-        Assert.assertEquals(street.getAttribute("value"), "Gajowa 2/4a");
+        Assert.assertEquals("Bogdan", firstName.getAttribute("value"));
+        Assert.assertEquals("Bogucki", lastName.getAttribute("value"));
+        Assert.assertEquals("boguskopytko@amorki.pl", email.getAttribute("value"));
+        Assert.assertEquals("Chorzów", city.getAttribute("value"));
+        Assert.assertEquals("Gajowa 2/4a", street.getAttribute("value"));
         Assert.assertTrue(rulesCheckBox.isSelected());
     }
 }

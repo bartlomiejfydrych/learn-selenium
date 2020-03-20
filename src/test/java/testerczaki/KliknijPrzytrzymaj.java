@@ -18,7 +18,7 @@ public class KliknijPrzytrzymaj extends TestBase {
         Assert.assertTrue(driver.findElement(By.id("alert1")).isDisplayed());
 
         //Zadanie 2
-        actions.clickAndHold(driver.findElement(By.id("holdClick"))).pause(3000).release().perform();
+        actions.clickAndHold(driver.findElement(By.id("holdClick"))).pause(3010).release().perform();
         Assert.assertTrue(driver.findElement(By.id("alert2")).isDisplayed());
     }
 }

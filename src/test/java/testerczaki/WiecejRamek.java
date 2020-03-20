@@ -6,17 +6,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 
-public class WiecejRamek extends TestBase
-{
+public class WiecejRamek extends TestBase {
     @Test
     public void wiecejRamek() {
         driver.findElement(By.cssSelector("[href=\"/ramki\"]")).click();
-        int sizeBasicPage = driver.findElements(By.tagName("iframe")).size();
-        System.out.println(sizeBasicPage);
+
         WebElement iframe2 = driver.findElement(By.cssSelector("[src=\"/iframe2.php\"]"));
         driver.switchTo().frame(iframe2);
-        int sizeInIframe2 = driver.findElements(By.tagName("iframe")).size();
-        System.out.println(sizeInIframe2);
 
         WebElement iframe3 = driver.findElement(By.cssSelector("[src=\"/iframe3.php\"]"));
         WebElement iframe4 = driver.findElement(By.cssSelector("[src=\"/iframe4.php\"]"));

@@ -22,7 +22,7 @@ public class TestBase {
 
     @After
     public void tearDown() throws InterruptedException {
-        Thread.sleep(3000);
+        //Thread.sleep(3000); // Tego się używa tylko do developowania. Nigdy tego nie commitować
         driver.quit();
     }
 }

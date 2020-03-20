@@ -3,47 +3,41 @@ package testerczaki;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.fail;
 
 
 public class Tabele extends TestBase {
 
     @Test
-    public void tabele(){
+    public void tabele() throws InterruptedException {
         driver.findElement(By.cssSelector("[href=\"/tabele\"]")).click();
 
-        // Pole 1
-        List<String> stringsPole1 = new ArrayList<>();
-        for (int i = 1; i <= 5; i++){
-            stringsPole1.add(driver.findElement(By.xpath("//*[@id=\"table1\"]/tr[" + i + "]/td[2]")).getText());
+        List<WebElement> rows = driver.findElements(By.cssSelector("#table1 tr"));
+
+        int sum = 0;
+        String wiekJanusza = "";
+        String imieWarszawiaka = "";
+        for (WebElement row : rows) {
+            List<WebElement> cells = row.findElements(By.cssSelector("td"));
+            WebElement imie = cells.get(0);
+            WebElement wiek = cells.get(1);
+            WebElement miasto = cells.get(2);
+            sum += Integer.parseInt(wiek.getText());
+
+            if (imie.getText().equals("Janusz")) wiekJanusza = wiek.getText();
+            if (miasto.getText().equals("Warszawa")) imieWarszawiaka = imie.getText();
         }
-        List<Integer> intsPole1 = new ArrayList<>();
-        for (String s : stringsPole1) intsPole1.add(Integer.valueOf(s));
 
-        int total = 0;
-        for (int i=0; i<intsPole1.size(); i++){
-            total = total + intsPole1.get(i);
-        }
-        double srednia = (double)total / (double)intsPole1.size();
+        double srednia = (double)sum / (double)rows.size();
+        driver.findElement(By.cssSelector("#avg")).sendKeys(Double.toString(srednia));
+        driver.findElement(By.cssSelector("#age")).sendKeys(wiekJanusza);
+        driver.findElement(By.cssSelector("#name")).sendKeys(imieWarszawiaka);
 
-        String sSrednia = String.valueOf(srednia);
-
-        driver.findElement(By.id("avg")).sendKeys(sSrednia);
-
-
-        // Pole 2
-        String wiekJanusza = driver.findElement(By.xpath("//td[text()='Janusz']/following-sibling::td[1]")).getText();
-        driver.findElement(By.id("age")).sendKeys(wiekJanusza);
-
-
-        // Pole 3
-        String imieWarszawiaka = driver.findElement(By.xpath("//td[text()='Warszawa']/preceding-sibling::td[2]")).getText();
-        driver.findElement(By.id("name")).sendKeys(imieWarszawiaka);
-
-
-        // Zakonczenie
         driver.findElement(By.id("submit1")).click();
         Assert.assertTrue(driver.findElement(By.id("alert1")).isDisplayed());
     }

@@ -5,10 +5,10 @@ import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 
-public class Komunikaty extends TestBase
-{
+public class Komunikaty extends TestBase {
+
     @Test
-    public void komunikaty(){
+    public void komunikaty() {
         driver.findElement(By.cssSelector("[href=\"/komunikaty\"]")).click();
         driver.findElement(By.id("msgBtn")).click();
         Alert alert = driver.switchTo().alert();
